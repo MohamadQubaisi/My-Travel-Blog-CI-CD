@@ -7,9 +7,9 @@ pipeline {
                 script{
                         withCredentials([usernamePassword(credentialsId: 'docker-login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh '''
-                                docker login -u ${USERNAME} -p ${PASSWORD}
-                                docker build -t mohamadqubaisi/hello-app:v${BUILD_NUMBER} .
-                                docker push mohamadqubaisi/hello-app:v${BUILD_NUMBER}
+                                #docker login -u ${USERNAME} -p ${PASSWORD}
+                                #docker build -t mohamadqubaisi/hello-app:v${BUILD_NUMBER} .
+                                #docker push mohamadqubaisi/hello-app:v${BUILD_NUMBER}
                                 echo ${BUILD_NUMBER} > ../build.txt
                             '''
                         
