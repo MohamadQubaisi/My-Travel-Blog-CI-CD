@@ -22,8 +22,11 @@ pipeline {
             steps {
                 echo 'deploying'
                 script {
-                        withCredentials([file(credentialsId: 'hello-app-kubeconfig', variable: 'KUBECONFIG')]) {
+                        withCredentials([file(credentialsId: 'hello-app-kubeconfig', variable: 'KUBECONFIG') ,
+                        usernamePassword(credentialsId: 'aws_credentials', usernameVariable: 'aws_access_key_id', passwordVariable: 'aws_secret_access_key')]) {
                             sh '''
+                                export AWS_ACCESS_KEY_ID = ${aws_access_key_id}
+                                export AWS_SECRET_ACCESS_KEY = ${aws_secret_access_key}
                                 export BUILD_NUMBER=$(cat ../build.txt)
                                 mv Deployment/deploy.yaml Deployment/deploy.yaml.tmp
                                 cat Deployment/deploy.yaml.tmp | \
