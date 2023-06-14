@@ -1,2 +1,12 @@
 FROM nginx:alpine
-COPY index.html /usr/share/nginx/html
+
+# Update package repositories and install gettext
+RUN apk update && \
+    apk add gettext
+
+# Copy your application files to the appropriate directory
+COPY . /usr/share/nginx/html
+
+# Expose the desired port
+EXPOSE 80
+
