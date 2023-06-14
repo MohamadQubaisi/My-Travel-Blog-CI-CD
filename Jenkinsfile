@@ -27,7 +27,7 @@ pipeline {
                                 export BUILD_NUMBER=$(cat ../build.txt)
                                 mv Deployment/deploy.yaml Deployment/deploy.yaml.tmp
                                 cat Deployment/deploy.yaml.tmp | \
-                                sed "s|\${BUILD_NUMBER}|${BUILD_NUMBER}|g" > Deployment/deploy.yaml
+                                sed "s|{BUILD_NUMBER}|${BUILD_NUMBER}|g" > Deployment/deploy.yaml
                                 rm -f Deployment/deploy.yaml.tmp
                                 kubectl apply -f Deployment --kubeconfig "${KUBECONFIG}" 
 
