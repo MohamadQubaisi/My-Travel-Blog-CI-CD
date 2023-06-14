@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: helloapp
-  name: helloapp
+    app: my-travel-blog
+  name: my-travel-blog
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: helloapp
+      app: my-travel-blog
   template:
     metadata:
       labels:
-        app: helloapp
+        app: my-travel-blog
     spec:
       containers:
-        - image: mohamadqubaisi/hello-app:v{BUILD_NUMBER}
-          name: helloapp
+        - image: mohamadqubaisi/my-travel-blog:v{BUILD_NUMBER}
+          name: my-travel-blog
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-service
+  name: my-travel-blog-service
   namespace: jenkins
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
@@ -39,4 +39,4 @@ spec:
       port: 80
       targetPort: 80
   selector:
-    app: helloapp
+    app: my-travel-blog

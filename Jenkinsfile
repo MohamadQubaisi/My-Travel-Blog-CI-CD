@@ -8,8 +8,8 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'docker-login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh '''
                                 docker login -u ${USERNAME} -p ${PASSWORD}
-                                docker build -t mohamadqubaisi/hello-app:v${BUILD_NUMBER} .
-                                docker push mohamadqubaisi/hello-app:v${BUILD_NUMBER}
+                                docker build -t mohamadqubaisi/my-travel-blog:v${BUILD_NUMBER} .
+                                docker push mohamadqubaisi/my-travel-blog:v${BUILD_NUMBER}
                                 echo ${BUILD_NUMBER} > ../build.txt
                             '''
                         
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'deploying'
                 script {
-                        withCredentials([file(credentialsId: 'hello-app-kubeconfig', variable: 'KUBECONFIG') ,
+                        withCredentials([file(credentialsId: 'my-travel-blog-kubeconfig', variable: 'KUBECONFIG') ,
                         usernamePassword(credentialsId: 'aws_credentials', usernameVariable: 'aws_access_key_id', passwordVariable: 'aws_secret_access_key')]) {
                             sh '''
                                 export AWS_ACCESS_KEY_ID=${aws_access_key_id}
